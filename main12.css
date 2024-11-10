@@ -1,0 +1,134 @@
+header {
+    display: flex;
+    background-color: rgba(255, 203, 173, 0.9);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom-width: 3px;
+    border-bottom-style:solid;
+    border-bottom-color: coral; 
+}
+
+body {
+    margin: 0px;
+}
+
+li { 
+    display: inline-block; 
+    font-family: cursive;
+    font-weight: 100;
+    font-size: 18px;
+}
+ul {
+    padding-left: 746px;
+    padding-top: 25px;
+}
+.a1 {
+    text-decoration: none;
+    color: black;
+    padding-right: 15px;
+}
+.name {
+     margin-top: 0px;
+     padding-top: 25px;
+     padding-left: 20px;
+     font-family:cursive;
+     font-weight: 100;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+.container {
+    background-image: url("backgroundimg.png");
+    background-size: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 450px;
+}
+
+body {
+    background-image: url("back.png");
+    background-size: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.main-name{
+    font-size: 65px;
+    margin: 0;
+    padding-left: 260px;
+    padding-top: 150px;
+    font-family:cursive;
+    font-weight: 100;
+}
+
+.main-description {
+    font-size: 30px;
+    margin: 0;
+    padding-left: 270px;
+    padding-top: 8px;
+    font-family: "PT Sans", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+.about {
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left:270px;
+    padding: 5px;
+    padding-left: 15px;
+    font-family: "PT Sans", "Arial", sans-serif;
+    width: 310px;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-color: brown 
+}
+
+
+footer {
+    background-color: coral;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    font-size: 18px;
+    padding-left: 15px;
+    color: brown
+}
+
+footer img{
+    height: 20px;
+    padding: 5px
+}
+
+.catalog-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.product-item {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.product-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.product-item p {
+    margin: 5px 0;
+}
+
+.product-image {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
