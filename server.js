@@ -256,3 +256,36 @@ app.post('/save-order', function(req, res) {
         });
     });
 });
+
+////////////////
+app.get('/orders', function(req, res) {
+    const query = `
+        SELECT 
+            clients.name AS client_name,
+            clients.lastname AS client_lastname,
+            orders.id AS order_id,
+            orders.sum AS total_sum,
+            orders.datetime AS order_date,
+            catalog.name_product AS product_name,
+            ordered_products.count AS product_quantity,
+            ordered_products.price AS product_price
+        FROM 
+            orders
+        JOIN 
+            clients ON orders.idclient = clients.id
+        JOIN 
+            ordered_products ON orders.id = ordered_products.idorder
+        JOIN 
+            catalog ON ordered_products.idproduct = catalog.id
+        ORDER BY 
+            orders.datetime DESC;
+    `;
+
+    connection.query(query, function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении заказов:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении заказов' });
+        }
+        res.json({ success: true, data: results });
+    });
+});

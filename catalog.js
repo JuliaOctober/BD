@@ -21,7 +21,6 @@ function loadCategories() {
 
 // Функция для загрузки товаров
 // Функция для загрузки товаров с изображениями
-// Функция для загрузки товаров
 function loadProducts(categoryId = '') {
     const url = categoryId ? `http://127.0.0.1:3000/catalog?categoryId=${categoryId}` : 'http://127.0.0.1:3000/catalog';
 
@@ -32,7 +31,6 @@ function loadProducts(categoryId = '') {
                 productList.innerHTML = ''; // Очистить список товаров
 
                 data.data.forEach(product => {
-                    // Создаем элемент .product-item
                     var productDiv = document.createElement('div');
                     productDiv.className = 'product-item';
 
@@ -42,9 +40,9 @@ function loadProducts(categoryId = '') {
                     productDiv.innerHTML = `
                         <img src="${imagePath}" alt="${product.name_product}" class="product-image" onerror="this.onerror=null;this.src='default_image.png';">
                         <h3>${product.name_product}</h3>
-                        <p>Цена: ${product.price} руб.</p>`;
-                    
-                    // Добавляем товар в список
+                        <p>Цена: ${product.price} руб.</p>
+                        <p>Категория: ${product.category_name}</p>
+                    `;
                     productList.appendChild(productDiv);
                 });
             }
