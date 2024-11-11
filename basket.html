@@ -27,20 +27,30 @@
             </div>
         </main>
         
-            <h1>Ваши заказы</h1>
+        <div class="order-container">
+            <h1>Корзина</h1>
             <table id="ordersTable">
                 <thead>
                     <tr>
-                        <th>Дата заказа</th>
                         <th>Продукты</th>
                         <th>Общая стоимость</th>
-                        <th>Удалить заказ</th>
+                        <th img src="img7.png" class="delete-icon"/th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Данные будут загружаться сюда -->
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold;">Итого:</td>
+                        <td id="totalAmount" style="font-weight: bold;">0₽</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
+            <button id="placeOrderButton" onclick="placeOrder()">Оформить заказ</button>
+            <p id="confirmationMessage" style="display: none; color: green; font-weight: bold;"></p>
+        </div>
 
         <script src="basket.js"></script>
     </body>

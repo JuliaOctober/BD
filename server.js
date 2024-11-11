@@ -447,6 +447,7 @@ app.delete('/delete-staff/:id', function(req, res) {
         });
     });
 });
+
 ///////////////
 app.get('/client-orders', function(req, res) {
     connection.query(
@@ -519,3 +520,16 @@ app.post('/delete-order', function(req, res) {
     });
 });
 
+app.post('/place-order', function(req, res) {
+    const userId = req.body.userId; 
+
+    connection.query('DELETE FROM orders WHERE clients_id = ?', [userId], function(error) {
+        if (error) {
+            console.error('Ошибка при очистке корзины:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при очистке корзины' });
+        }
+
+        // Возвращаем успешный ответ
+        res.json({ success: true, message: 'Заказ успешно оформлен. Спасибо! Наш менеджер свяжется с вами.' });
+    });
+});

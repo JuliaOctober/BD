@@ -87,50 +87,6 @@ body {
     border-left-style: solid;
     border-color: brown 
 }
-
-.order{
-    margin-top: 30px;
-    margin-left:270px;
-    font-size: 20px;
-    padding: 10px 30px 10px 30px;
-     border-radius: 25px;
-    background-color: brown;
-    color:floralwhite
-}
-
-h3 {
-    text-align: center;
-    font-size: 30px;
-    color: brown;
-}
-
-.aboutus {
-    margin: 20px 200px;
-    font-size: 20px;
-    font-family: "PT Sans", "Arial", sans-serif;
-}
-
-.containerimg img {
-    width: 450px;
-    height: 300px;
-    margin: 10px;
-    border: 10px solid #fefae0;
-    transition-duration: 1s;
-}
-
-.containerimg img:hover {
-    border: 5px solid #fff;
-    transform: scale(1.1);
-    filter: none;
-}
-
-.containerimg {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 footer {
     background-color: coral;
     display: flex;
@@ -145,6 +101,150 @@ footer {
 footer img{
     height: 20px;
     padding: 5px
+}
+
+.delete-icon {
+    width: 30px; 
+    height: 30px;
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+}
+
+.delete-icon:hover {
+    transform: scale(1.1); 
+}
+
+.order-container {
+    padding: 20px;
+    margin: 20px;
+    max-width: auto;
+    background-color: #FDE5D6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+#ordersTable th {
+    padding: 12px;
+    border-bottom: 1px solid #fefae0;
+    text-align: left;
+}
+
+#ordersTable th {
+    background-color: #FDE5D6;
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+#ordersTable tbody tr {
+    background-color: #FDE5D6; 
+}
+
+#ordersTable tbody tr:hover {
+    background-color:  #fefae0;
+}
+
+#ordersTable td {
+    position: relative;
+    padding: 8px 15px;
+    text-align: left;
+}
+
+
+.basket-total {
+    font-size: 16px;
+    color: brown;
+}
+
+.basket-total span {
+    color: #b12704;
+}
+
+#ordersTable td .delete-button:hover {
+    background-color: #c0392b;
+}
+
+#ordersTable td ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+
+/* Дополнительное оформление для эффекта кассового чека */
+#ordersTable td::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #fefae0;
+}
+
+#ordersTable td:first-child {
+    font-weight: bold;
+    color: #444;
+}
+
+#ordersTable td:last-child {
+    font-weight: bold;
+    color: #b12704; /* Красноватый оттенок для итоговой суммы */
+}
+
+.products-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    font-size: 14px;
+    border-bottom: 1px dashed #ddd; /* Линия между товарами */
+}
+
+.product-item {
+        padding: 10px 0;  /* Немного отступов для товаров */
+        border-bottom: 1px dashed #ddd;  /* Линия разделения между товарами */
+        font-size: 14px;
+        display: block;  /* Каждый товар — блок, чтобы перейти на новую строку */
+    }
+
+.product-name {
+    text-align: left;
+    color: #333;
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-qty-price {
+    text-align: right;
+    color: #555;
+}
+
+#placeOrderButton{
+    margin-top: 30px;
+    margin-left:470px;
+    font-size: 16px;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    background-color: brown;
+    color:floralwhite;
+    cursor: pointer;
 }
 
 /* Адаптивные стили для экрана шириной меньше 900px */
@@ -169,7 +269,6 @@ footer img{
         display: flex;
         padding: 0;
         margin: 0;
-        justify-content: center;
         gap: 10px;
     }
 
@@ -198,4 +297,5 @@ footer img{
     margin-top: 30px;
     margin-left:230px;
     }
+    
 }
