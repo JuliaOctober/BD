@@ -155,6 +155,7 @@ footer img{
     background-color: #FDE5D6;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
 }
 
 #ordersTable {
@@ -184,6 +185,7 @@ footer img{
 }
 
 #ordersTable td {
+    display: block;
     position: relative;
 }
 
@@ -199,6 +201,7 @@ footer img{
 }
 
 #ordersTable td:first-child {
+    display: block;
     font-weight: bold;
     color: #444;
 }
@@ -209,6 +212,7 @@ footer img{
 }
 
 .products-list {
+    display: block;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -264,7 +268,7 @@ footer img{
     }
 
     li {
-        display: inline;
+        display: block;
         font-size: 16px;
     }
 

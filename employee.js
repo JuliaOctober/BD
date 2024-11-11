@@ -15,7 +15,11 @@ function loadStaff() {
                 <td>${formatDate(staff.dateofhiring)}</td>
                 <td>${staff.passport}</td>
                 <td>${staff.post}</td>
-                <td><button onclick="deleteStaff(${staff.id})">-</button></td>
+                <td>
+                    <button class="delete-btn" onclick="deleteStaff(${staff.id})"> 
+                        <img src="img8.png" alt="Удалить" class="delete-icon"> 
+                    </button>
+                </td>
             `;
 
             staffList.appendChild(row);

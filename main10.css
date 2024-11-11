@@ -88,49 +88,6 @@ body {
     border-color: brown 
 }
 
-.order{
-    margin-top: 30px;
-    margin-left:270px;
-    font-size: 20px;
-    padding: 10px 30px 10px 30px;
-     border-radius: 25px;
-    background-color: brown;
-    color:floralwhite
-}
-
-h3 {
-    text-align: center;
-    font-size: 30px;
-    color: brown;
-}
-
-.aboutus {
-    margin: 20px 200px;
-    font-size: 20px;
-    font-family: "PT Sans", "Arial", sans-serif;
-}
-
-.containerimg img {
-    width: 450px;
-    height: 300px;
-    margin: 10px;
-    border: 10px solid #fefae0;
-    transition-duration: 1s;
-}
-
-.containerimg img:hover {
-    border: 5px solid #fff;
-    transform: scale(1.1);
-    filter: none;
-}
-
-.containerimg {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 footer {
     background-color: coral;
     display: flex;
@@ -198,4 +155,111 @@ footer img{
     margin-top: 30px;
     margin-left:230px;
     }
+}
+
+/* Стили для таблицы товаров */
+table {
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #FDE5D6;
+}
+
+table th {
+    background-color: #FDE5D6;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #FDE5D6;
+}
+
+#productsTable {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Стили для формы добавления товара */
+#add-product-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 30px auto;
+}
+
+#add-product-form h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#add-product-form label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#add-product-form input,
+#add-product-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#add-product-form button {
+    margin-top: 30px;
+    margin-left:270px;
+    font-size: 20px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 25px;
+    background-color: brown;
+    color:floralwhite;
+    cursor: pointer;
+}
+
+#add-product-form button:hover {
+    background-color: #ff6600;
+}
+
+@media screen and (max-width: 900px) {
+    /* Сужаем таблицу */
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Сужаем форму добавления товара */
+    #add-product-form {
+        width: 90%;
+    }
+}
+
+/* Стили для кнопки удаления */
+.delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-icon {
+    width: 20px;  /* Размер изображения */
+    height: 20px;
+    transition: opacity 0.3s;
+}
+
+.delete-btn:hover .delete-icon {
+    opacity: 0.7;  /* Плавное изменение прозрачности на наведение */
 }

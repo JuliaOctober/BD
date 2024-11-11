@@ -14,7 +14,9 @@ function loadProducts() {
                         <td>${product.price} ₽</td>
                         <td>${product.catagory_name}</td>
                         <td>
-                            <button onclick="deleteProduct(${product.id})">Удалить</button>
+                            <button class="delete-btn" onclick="deleteProduct(${product.id})">
+                                <img src="img8.png" alt="Удалить" class="delete-icon">
+                            </button>
                         </td>
                     `;
                     tableBody.appendChild(row);

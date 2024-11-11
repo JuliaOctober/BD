@@ -199,3 +199,120 @@ footer img{
     margin-left:230px;
     }
 }
+
+/* Таблица сотрудников */
+#staff-table {
+    margin: 20px;
+    padding: 20px;
+    background-color: #FDE5D6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#staff-table h3 {
+    margin-right: 400px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#staff-table table {
+    width: 100%;
+    border-collapse: none;
+}
+
+#staff-table table th, #staff-table table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #FFAB7C;
+}
+
+#staff-table table th {
+    background-color: #FDE5D6;
+    color: #333;
+}
+
+#staff-table table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#staff-table table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Форма добавления сотрудника */
+#add-staff-form {
+    margin: 20px;
+    padding: 20px;
+    background-color: #FDE5D6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#add-staff-form h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#add-staff-form label {
+    display: block;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+#add-staff-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#add-staff-form button {
+    margin-top: 30px;
+    font-size: 16px;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    background-color: brown;
+    color:floralwhite;
+    cursor: pointer;
+}
+
+#add-staff-form button:hover {
+    background-color: #e5533f;
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+    .header_page h1.name {
+        font-size: 1.4em;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #staff-table table th, #staff-table table td {
+        font-size: 0.9em;
+    }
+}
+
+/* Стили для кнопки удаления */
+.delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-icon {
+    width: 20px;  /* Размер изображения */
+    height: 20px;
+    transition: opacity 0.3s;
+}
+
+.delete-btn:hover .delete-icon {
+    opacity: 0.7;  /* Плавное изменение прозрачности на наведение */
+}
