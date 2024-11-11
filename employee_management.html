@@ -28,8 +28,49 @@
             </div>
         </main>
         
-        <h1>Здесь должно быть выведено несеолько таблиц: список сотрудников, смена сотрудников ... (также придумать как работать с этими таблицами)</h1>
-        
+        <!-- Таблица сотрудников -->
+        <div id="staff-table">
+    <h3>Список сотрудников</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Дата найма</th>
+                <th>Паспорт</th>
+                <th>Должность</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody id="staff-list">
+            <!-- Динамически загруженные данные сотрудников -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Форма добавления нового сотрудника -->
+<div id="add-staff-form">
+    <h3>Добавить нового сотрудника</h3>
+    <label for="staffName">Имя:</label>
+    <input type="text" id="staffName" required>
+    <br>
+    <label for="staffLastname">Фамилия:</label>
+    <input type="text" id="staffLastname" required>
+    <br>
+    <label for="staffDateOfHiring">Дата найма:</label>
+    <input type="date" id="staffDateOfHiring" required>
+    <br>
+    <label for="staffPassport">Паспорт:</label>
+    <input type="text" id="staffPassport" required>
+    <br>
+    <label for="staffPost">Должность:</label>
+    <input type="text" id="staffPost" required>
+    <br>
+    <button onclick="addStaff()">Добавить сотрудника</button>
+</div>
+
+
+         <script src="employee.js"></script>
     </body>
     <footer><h5>Связь с нами в социальных сетях:</h5><br>
         <img src="tg1.png">

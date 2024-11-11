@@ -39,6 +39,7 @@ function displayOrders(orders) {
 
             currentOrderRow = document.createElement('tr');
             currentOrderRow.innerHTML = `
+                <td>${order.order_id}</td>
                 <td>${order.client_name}</td>
                 <td>${order.client_lastname}</td>
                 <td>${formattedDate}</td>

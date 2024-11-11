@@ -42,11 +42,9 @@ function loadProducts(categoryId = '') {
                         <img src="${imagePath}" alt="${product.name_product}" class="product-image">
                         <h3>${product.name_product}</h3>
                         <p>Цена: ${product.price} руб.</p>
-                        <p>Категория: ${product.category_name}</p>
                         <button class="decrement" data-id="${product.id}">-</button>
                         <span class="product-quantity" id="quantity-${product.id}" data-id="${product.id}">0</span>
-                        <button class="increment" data-id="${product.id}">+</button>
-                    `;
+                        <button class="increment" data-id="${product.id}">+</button>`;
                     productList.appendChild(productDiv);
                 });
             }

@@ -289,3 +289,233 @@ app.get('/orders', function(req, res) {
         res.json({ success: true, data: results });
     });
 });
+
+/////////////////////////////
+// Получение всех товаров из базы данных и их вывод на страницу
+app.get('/get-products', function(req, res) {
+    connection.query(`
+        SELECT catalog.id, catalog.name_product, catalog.price, catalog.idcategory, catagory.name AS catagory_name
+        FROM catalog
+        JOIN catagory ON catalog.idcategory = catagory.id
+    `, function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении товаров:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении товаров' });
+        }
+        res.json({ success: true, products: results });
+    });
+});
+
+// Удаление товара из базы данных
+app.post('/delete-product', function(req, res) {
+    const productId = req.body.productId;
+
+    // Шаг 1: Удалить все связанные записи в таблице ordered_products
+    connection.query('DELETE FROM ordered_products WHERE catalog_id = ?', [productId], function(error) {
+        if (error) {
+            console.error('Ошибка при удалении записей из ordered_products:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при удалении записей из ordered_products' });
+        }
+
+        // Шаг 2: Удалить товар из таблицы catalog
+        connection.query('DELETE FROM catalog WHERE id = ?', [productId], function(error) {
+            if (error) {
+                console.error('Ошибка при удалении товара из catalog:', error);
+                return res.status(500).json({ success: false, message: 'Ошибка при удалении товара из catalog' });
+            }
+            res.json({ success: true, message: 'Товар удален' });
+        });
+    });
+});
+
+// Маршрут для добавления нового товара
+app.post('/add-product', function(req, res) {
+    const { name, price, categoryId } = req.body;
+
+    // Шаг 1: Получить последний ID из таблицы catalog и определить новый ID
+    connection.query('SELECT MAX(id) AS last_id FROM catalog', function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении последнего ID товара:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении последнего ID товара' });
+        }
+
+        const newProductId = (results[0].last_id || 0) + 1;
+
+        // Шаг 2: Вставить новый товар в таблицу catalog
+        connection.query('INSERT INTO catalog (id, name_product, price, idcategory, catagory_id) VALUES (?, ?, ?, ?, ?)', 
+        [newProductId, name, price, categoryId, categoryId], 
+        function(error) {
+            if (error) {
+                console.error('Ошибка при добавлении товара в catalog:', error);
+                return res.status(500).json({ success: false, message: 'Ошибка при добавлении товара' });
+            }
+            res.json({ success: true, message: 'Товар успешно добавлен' });
+        });
+    });
+});
+
+// Маршрут для получения списка категорий (для загрузки в выпадающий список)
+app.get('/categories2', function(req, res) {
+    connection.query('SELECT id, name FROM catagory', function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении категорий:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении категорий' });
+        }
+        res.json({ success: true, categories: results });
+    });
+});
+//////////////////////////////
+// Маршрут для получения списка сотрудников
+app.get('/staff', function(req, res) {
+    connection.query('SELECT * FROM staff', function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении списка сотрудников:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении списка сотрудников' });
+        }
+        res.json({ success: true, staff: results });
+    });
+});
+
+// Маршрут для добавления нового сотрудника
+app.post('/add-staff', function(req, res) {
+    const { name, lastname, dateOfHiring, passport, post } = req.body;
+
+    connection.query('SELECT MAX(id) AS last_id FROM staff', function(error, results) {
+        if (error) {
+            console.error('Ошибка при получении последнего ID сотрудника:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при получении последнего ID сотрудника' });
+        }
+
+        const newStaffId = (results[0].last_id || 0) + 1;
+
+        connection.query('INSERT INTO staff (id, name, lastname, dateofhiring, passport, post) VALUES (?, ?, ?, ?, ?, ?)', 
+        [newStaffId, name, lastname, dateOfHiring, passport, post], 
+        function(error) {
+            if (error) {
+                console.error('Ошибка при добавлении сотрудника в базу данных:', error);
+                return res.status(500).json({ success: false, message: 'Ошибка при добавлении сотрудника' });
+            }
+            res.json({ success: true, message: 'Сотрудник успешно добавлен' });
+        });
+    });
+});
+
+
+// Маршрут для удаления сотрудника
+// Обработка запроса для удаления сотрудника
+app.delete('/delete-staff/:id', function(req, res) {
+    const staffId = req.params.id;
+
+    // Начинаем транзакцию для выполнения обоих запросов
+    connection.beginTransaction(function(err) {
+        if (err) {
+            console.error('Ошибка при начале транзакции:', err);
+            return res.status(500).json({ success: false, message: 'Ошибка при удалении сотрудника' });
+        }
+
+        // Шаг 1: Удаляем записи из таблицы worktime, связанные с этим сотрудником
+        connection.query('DELETE FROM worktime WHERE idstaff = ?', [staffId], function(error) {
+            if (error) {
+                return connection.rollback(function() {
+                    console.error('Ошибка при удалении записей из worktime:', error);
+                    res.status(500).json({ success: false, message: 'Ошибка при удалении данных из worktime' });
+                });
+            }
+
+            // Шаг 2: Удаляем сотрудника из таблицы staff
+            connection.query('DELETE FROM staff WHERE id = ?', [staffId], function(error) {
+                if (error) {
+                    return connection.rollback(function() {
+                        console.error('Ошибка при удалении сотрудника:', error);
+                        res.status(500).json({ success: false, message: 'Ошибка при удалении сотрудника' });
+                    });
+                }
+
+                // Если оба запроса прошли успешно, коммитим транзакцию
+                connection.commit(function(err) {
+                    if (err) {
+                        return connection.rollback(function() {
+                            console.error('Ошибка при коммите транзакции:', err);
+                            res.status(500).json({ success: false, message: 'Ошибка при сохранении изменений' });
+                        });
+                    }
+
+                    // Успешное удаление
+                    res.json({ success: true, message: 'Сотрудник успешно удален' });
+                });
+            });
+        });
+    });
+});
+///////////////
+app.get('/client-orders', function(req, res) {
+    connection.query(
+        `SELECT orders.id AS order_id, orders.datetime, orders.sum, ordered_products.count, ordered_products.price, catalog.name_product 
+        FROM orders
+        JOIN ordered_products ON orders.id = ordered_products.idorder
+        JOIN catalog ON ordered_products.catalog_id = catalog.id
+        WHERE orders.idclient = ?`,
+        [clientID],
+        function(error, results) {
+            if (error) {
+                console.error('Ошибка при получении заказов клиента:', error);
+                return res.status(500).json({ success: false, message: 'Ошибка при получении заказов' });
+            }
+
+            // Группируем данные по заказам, чтобы отображать каждый заказ отдельно
+            let orders = [];
+            results.forEach(item => {
+                let order = orders.find(o => o.order_id === item.order_id);
+                if (!order) {
+                    order = {
+                        order_id: item.order_id,
+                        datetime: item.datetime,
+                        sum: item.sum,
+                        products: []
+                    };
+                    orders.push(order);
+                }
+                order.products.push({
+                    name: item.name_product,
+                    count: item.count,
+                    price: item.price,
+                    total_price: item.count * item.price
+                });
+            });
+
+            res.json({ success: true, orders: orders });
+        }
+    );
+});
+
+app.post('/delete-order', function(req, res) {
+    const orderId = req.body.orderId;
+
+    // Шаг 1: Удалить все записи из таблицы ordered_products, связанные с данным заказом
+    connection.query('DELETE FROM ordered_products WHERE orders_id = ?', [orderId], function(error) {
+        if (error) {
+            console.error('Ошибка при удалении записей из ordered_products:', error);
+            return res.status(500).json({ success: false, message: 'Ошибка при удалении записей из ordered_products' });
+        }
+
+        // Шаг 2: Удалить все записи в таблице orders_staff, связанные с данным заказом
+        connection.query('DELETE FROM orders_staff WHERE orders_id = ?', [orderId], function(error) {
+            if (error) {
+                console.error('Ошибка при удалении записей из orders_staff:', error);
+                return res.status(500).json({ success: false, message: 'Ошибка при удалении записей из orders_staff' });
+            }
+
+            // Шаг 3: Удалить заказ из таблицы orders
+            connection.query('DELETE FROM orders WHERE id = ?', [orderId], function(error) {
+                if (error) {
+                    console.error('Ошибка при удалении заказа:', error);
+                    return res.status(500).json({ success: false, message: 'Ошибка при удалении заказа' });
+                }
+
+                // Возвращаем успешный ответ
+                res.json({ success: true, message: 'Заказ успешно удален' });
+            });
+        });
+    });
+});
+
