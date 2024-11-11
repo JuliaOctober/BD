@@ -147,6 +147,96 @@ footer img{
     padding: 5px
 }
 
+/* Стили для таблицы заказов */
+.order-container {
+    padding: 20px;
+    margin: 20px;
+    max-width: auto;
+    background-color: #FDE5D6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+#ordersTable th, #ordersTable td {
+    padding: 12px;
+    border-bottom: 1px solid #fefae0;
+    text-align: left;
+}
+
+#ordersTable th {
+    background-color: #FDE5D6;
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+#ordersTable tr:hover {
+    background-color:  #fefae0;
+}
+
+#ordersTable td {
+    position: relative;
+}
+
+/* Дополнительное оформление для эффекта кассового чека */
+#ordersTable td::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(to right, #fefae0, #ddd, #fefae0);
+}
+
+#ordersTable td:first-child {
+    font-weight: bold;
+    color: #444;
+}
+
+#ordersTable td:last-child {
+    font-weight: bold;
+    color: #b12704; /* Красноватый оттенок для итоговой суммы */
+}
+
+.products-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    font-size: 14px;
+    border-bottom: 1px dashed #ddd; /* Линия между товарами */
+}
+
+.product-item:last-child {
+    border-bottom: none; /* Убираем линию у последнего товара */
+}
+
+.product-name {
+    text-align: left;
+    color: #333;
+}
+
+.product-qty-price {
+    text-align: right;
+    color: #555;
+}
+
+
 /* Адаптивные стили для экрана шириной меньше 900px */
 @media screen and (max-width: 900px) {
     header {
@@ -197,5 +287,65 @@ footer img{
     .about {
     margin-top: 30px;
     margin-left:230px;
+    }
+    
+    .order-container {
+        overflow-x: auto; /* Добавляем горизонтальную прокрутку */
+    }
+
+    #ordersTable {
+        width: 100%; /* Таблица занимает всю ширину */
+        font-size: 14px; /* Уменьшаем размер шрифта */
+        border-collapse: collapse;
+    }
+
+    #ordersTable thead {
+        display: none; /* Скрываем заголовок таблицы для компактности */
+    }
+
+    #ordersTable tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #ordersTable td {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-bottom: 1px  #ddd;
+    }
+
+    #ordersTable td:last-child {
+        border-bottom: none; /* Убираем линию у последней ячейки */
+    }
+
+    /* Мобильное отображение продуктов */
+    .products-list {
+        padding: 0;
+        list-style: none;
+        display: block; /* Каждый товар на новой строке */
+    }
+
+    /* Стиль для каждого товара */
+    .product-item {
+        padding: 10px 0;  /* Немного отступов для товаров */
+        border-bottom: 1px dashed #ddd;  /* Линия разделения между товарами */
+        font-size: 14px;
+        display: block;  /* Каждый товар — блок, чтобы перейти на новую строку */
+    }
+
+    /* Убираем линию у последнего товара */
+    .product-item:last-child {
+        border-bottom: none;
+    }
+
+    #ordersTable td:before {
+        content: attr(data-label); /* Добавляем метку */
+        font-weight: bold;
+        color: #555;
     }
 }

@@ -39,21 +39,30 @@ function displayOrders(orders) {
 
             currentOrderRow = document.createElement('tr');
             currentOrderRow.innerHTML = `
-                <td>${order.order_id}</td>
-                <td>${order.client_name}</td>
-                <td>${order.client_lastname}</td>
-                <td>${formattedDate}</td>
-                <td>
+                <td data-label="Номер заказа">${order.order_id}</td>
+                <td data-label="Имя клиента">${order.client_name}</td>
+                <td data-label="Фамилия клиента">${order.client_lastname}</td>
+                <td data-label="Дата заказа">${formattedDate}</td>
+                <td data-label="Список товаров">
                     <ul class="products-list"></ul>
                 </td>
-                <td>${order.total_sum}</td>
+                <td data-label="Общая сумма">${order.total_sum}</td>
             `;
             ordersTable.appendChild(currentOrderRow);
         }
 
+        // Находим список товаров внутри текущей строки
         const productsList = currentOrderRow.querySelector('.products-list');
+
+        // Создаем элемент для каждого продукта и добавляем его в список
         const productItem = document.createElement('li');
-        productItem.textContent = `${order.product_name} - ${order.product_quantity} шт. по цене ${order.product_price} ₽`;
+        productItem.classList.add('product-item');
+        productItem.innerHTML = `
+            <span class="product-name">${order.product_name}</span>
+            <span class="product-qty-price">${order.product_quantity} шт x ${order.product_price}₽</span>
+        `;
+        
+        //productItem.textContent = `${order.product_name} x${order.product_quantity} \n ${order.product_price} ₽`;
         productsList.appendChild(productItem);
     });
 }
